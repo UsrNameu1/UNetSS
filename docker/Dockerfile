@@ -36,7 +36,9 @@ RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
 && cd /opencv-${OPENCV_VERSION}/cmake_binary \
 && cmake -DBUILD_TIFF=ON \
   -DBUILD_opencv_java=OFF \
-#  -DWITH_CUDA=ON \
+  -DWITH_CUDA=ON \
+  -DCUDA_ARCH_BIN="7.5" \
+  -DCUDA_ARCH_PTX="7.5" \
   -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-${OPENCV_VERSION}/modules \
   -DWITH_OPENGL=ON \
   -DWITH_OPENCL=ON \
