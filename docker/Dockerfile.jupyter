@@ -5,7 +5,10 @@ RUN apt-get update \
     build-essential \
     cmake \
     git \
-    wget
+    wget \
+    libsm6 \
+    libxrender1 \
+    libxext6
 
 RUN wget https://bootstrap.pypa.io/get-pip.py \
 && python3 get-pip.py \
