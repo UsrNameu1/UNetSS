@@ -8,3 +8,4 @@ scikit-learn==0.20.2
 opencv-python==4.0.0.21
 joblib==0.13.2
 loguru==0.2.5
+click==7.0
