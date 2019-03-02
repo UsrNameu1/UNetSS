@@ -79,4 +79,7 @@ RUN pip3 --no-cache-dir install -r requirements.txt \
 
 ENV KERAS_BACKEND=tensorflow
 
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
 CMD ["/bin/bash"]
