@@ -6,11 +6,10 @@ import cv2
 from joblib import Parallel, delayed
 import click
 from loguru import logger
-from imgaug import augmenters as iaa
+from albumentations import RandomCrop
 
 from preprocess.labeling import transform_to_sizelabel
 
-iaa.AddToHueAndSaturation
 
 @click.command()
 @click.option('--image_dir', type=click.Path(exists=True), required=True, help="aerial image directory")
@@ -64,13 +63,13 @@ def _random_crop(
         gt_image = transform_to_sizelabel(gt_image)
         gt_image = cv2.cvtColor(gt_image, cv2.COLOR_RGB2BGR)
 
-    aug = iaa.CropToFixedSize(width=crop_size, height=crop_size)
+    aug = RandomCrop(width=crop_size, height=crop_size)
     file_stem = filename.split('.')[0]
 
     for i in range(sample_size):
-        aug_deterministic = aug.to_deterministic()
-        image_cropped = aug_deterministic.augment_image(image)
-        gt_cropped = aug_deterministic.augment_image(gt_image)
+        augmented = aug(image=image, mask=gt_image)
+        image_cropped = augmented['image']
+        gt_cropped = augmented['mask']
         imwrite(output_dir.joinpath(_image_subdir_name, _dummycls_name,
                                     '{}_{}.png'.format(file_stem, i)).as_posix(), image_cropped)
         imwrite(output_dir.joinpath(_gt_subdir_name, _dummycls_name,
