@@ -1,3 +1,5 @@
+from enum import Enum
+
 import numpy as np
 import cv2
 
@@ -31,3 +33,17 @@ def transform_to_sizelabel(bin_image: np.ndarray) -> np.ndarray:
             image = cv2.drawContours(image, [contour], -1, (0, 0, 255), -1)
 
     return image
+
+
+def to_cls_map(label_img: np.ndarray, label: Enum) -> np.ndarray:
+    """
+    transform gt label image to class map
+    :param label_img: gt label image
+    :param label: labeling information enum (see settings)
+    :return: class map image
+    """
+    w, h, _ = label_img.shape
+    cls_map = np.zeros((w, h), dtype=np.uint8)
+    for cls in label:
+        cls_map[np.all(label_img == cls.value.rgb, axis=-1)] = cls.value.cls
+    return cls_map
