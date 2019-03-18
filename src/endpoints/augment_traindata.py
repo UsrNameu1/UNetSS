@@ -9,6 +9,7 @@ from loguru import logger
 from albumentations import RandomCrop
 
 from preprocess.labeling import transform_to_sizelabel
+import settings
 
 
 @click.command()
@@ -31,8 +32,8 @@ def augment_traindata(
     output_dir = Path(output_dir)
 
     if not output_dir.exists():
-        output_dir.joinpath(_image_subdir_name, _dummycls_name).mkdir(parents=True)
-        output_dir.joinpath(_gt_subdir_name, _dummycls_name).mkdir(parents=True)
+        output_dir.joinpath(settings.image_subdir_name, settings.dummycls_name).mkdir(parents=True)
+        output_dir.joinpath(settings.gt_subdir_name, settings.dummycls_name).mkdir(parents=True)
 
     logger.debug("sample count: {}".format(image_count))
     Parallel(n_jobs=-1)(delayed(_random_crop)(
@@ -40,11 +41,6 @@ def augment_traindata(
         use_size_label=use_size_label, output_dir=output_dir
     ) for name in file_names)
     logger.debug("done")
-
-
-_image_subdir_name = 'image'
-_gt_subdir_name = 'gt'
-_dummycls_name = 'dummycls'
 
 
 def _random_crop(
@@ -70,9 +66,9 @@ def _random_crop(
         augmented = aug(image=image, mask=gt_image)
         image_cropped = augmented['image']
         gt_cropped = augmented['mask']
-        imwrite(output_dir.joinpath(_image_subdir_name, _dummycls_name,
+        imwrite(output_dir.joinpath(settings.image_subdir_name, settings.dummycls_name,
                                     '{}_{}.png'.format(file_stem, i)).as_posix(), image_cropped)
-        imwrite(output_dir.joinpath(_gt_subdir_name, _dummycls_name,
+        imwrite(output_dir.joinpath(settings.gt_subdir_name, settings.dummycls_name,
                                     '{}_{}.png'.format(file_stem, i)).as_posix(), gt_cropped)
 
 
