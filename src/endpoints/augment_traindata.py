@@ -1,7 +1,8 @@
 from pathlib import Path
 import math
 
-from cv2 import imread, imwrite
+from cv2 import imread
+from skimage.io import imsave
 import cv2
 from joblib import Parallel, delayed
 import click
@@ -66,9 +67,9 @@ def _random_crop(
         augmented = aug(image=image, mask=gt_image)
         image_cropped = augmented['image']
         gt_cropped = augmented['mask']
-        imwrite(output_dir.joinpath(settings.image_subdir_name, settings.dummycls_name,
+        imsave(output_dir.joinpath(settings.image_subdir_name, settings.dummycls_name,
                                     '{}_{}.png'.format(file_stem, i)).as_posix(), image_cropped)
-        imwrite(output_dir.joinpath(settings.gt_subdir_name, settings.dummycls_name,
+        imsave(output_dir.joinpath(settings.gt_subdir_name, settings.dummycls_name,
                                     '{}_{}.png'.format(file_stem, i)).as_posix(), gt_cropped)
 
 
