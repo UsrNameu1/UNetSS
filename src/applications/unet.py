@@ -12,13 +12,12 @@ from keras.layers import (
 )
 
 
-def conv_block(input_tensor, filters: int, kernel_size: int = 3, batch_normalize: bool = False):
-    x = Conv2D(filters, kernel_size, padding='same', kernel_initializer='he_normal')(input_tensor)
-    x = BatchNormalization()(x) if batch_normalize else x
-    x = Activation('relu')(x)
-    x = Conv2D(filters, kernel_size, padding='same', kernel_initializer='he_normal')(x)
-    x = BatchNormalization()(x) if batch_normalize else x
-    x = Activation('relu')(x)
+def conv_block(input_tensor, filters: int, kernel_size: int = 3, iterations: int = 2, batch_normalize: bool = False):
+    x = input_tensor
+    for _ in range(iterations):
+        x = Conv2D(filters, kernel_size, padding='same', kernel_initializer='he_normal')(x)
+        x = BatchNormalization()(x) if batch_normalize else x
+        x = Activation('relu')(x)
     return x
 
 
