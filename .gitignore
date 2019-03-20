@@ -108,5 +108,6 @@ venv.bak/
 notebook/*
 !notebook/*.ipynb
 input/
+output/
 *.out
 
