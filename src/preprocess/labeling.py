@@ -42,11 +42,28 @@ def to_cls_map(label_img: np.ndarray, label: Enum) -> np.ndarray:
     """
     transform gt label image to class map
     :param label_img: gt label image
-    :param label: labeling information enum (see settings)
+    :param label: labeling information enum (see settings.label)
     :return: class map image
     """
     w, h, _ = label_img.shape
     cls_map = np.zeros((w, h), dtype=np.uint8)
-    for cls in label:
-        cls_map[np.all(label_img == cls.value.rgb, axis=-1)] = cls.value.cls
+    for info in label:
+        cls_map[np.all(label_img == info.value.rgb, axis=-1)] = info.value.cls
     return cls_map
+
+
+def to_cls_branch_maps(label_img: np.ndarray, label: Enum) -> List[np.ndarray]:
+    """
+    transform gt labels image to class maps on each label
+    :param label_img: gt label image
+    :param label: labeling information enum (see settings.label)
+    :return: class map images on each label (0 or 1)
+    """
+    w, h, _ = label_img.shape
+    branch_maps = []
+    for info in label:
+        if info.value.cls > 0:
+            branch_map = np.zeros((w, h), dtype=np.uint8)
+            branch_map[np.all(label_img == info.value.rgb, axis=-1)] = 1
+            branch_maps.append(branch_map)
+    return branch_maps
