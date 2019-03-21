@@ -1,7 +1,10 @@
+from typing import List
 from enum import Enum
 
 import numpy as np
 import cv2
+
+from settings.label import SizeLabel
 
 
 def transform_to_sizelabel(bin_image: np.ndarray) -> np.ndarray:
@@ -24,13 +27,13 @@ def transform_to_sizelabel(bin_image: np.ndarray) -> np.ndarray:
 
         parent_idx = hierarchy[0][idx][3]
         if parent_idx >= 0:
-            image = cv2.drawContours(image, [contour], -1, (0, 0, 0), -1)
-        elif area <= 7500:
-            image = cv2.drawContours(image, [contour], -1, (255, 0, 0), -1)
-        elif 37500 > area >= 7500:
-            image = cv2.drawContours(image, [contour], -1, (0, 255, 0), -1)
-        elif area >= 37500:
-            image = cv2.drawContours(image, [contour], -1, (0, 0, 255), -1)
+            image = cv2.drawContours(image, [contour], -1, SizeLabel.blank.value.rgb, -1)
+        elif area <= 3400:
+            image = cv2.drawContours(image, [contour], -1, SizeLabel.small.value.rgb, -1)
+        elif 18800 > area >= 3400:
+            image = cv2.drawContours(image, [contour], -1, SizeLabel.medium.value.rgb, -1)
+        elif area >= 18800:
+            image = cv2.drawContours(image, [contour], -1, SizeLabel.large.value.rgb, -1)
 
     return image
 

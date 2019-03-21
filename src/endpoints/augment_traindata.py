@@ -58,7 +58,6 @@ def _random_crop(
     else:
         gt_image = imread(gt_path.as_posix(), cv2.IMREAD_GRAYSCALE)
         gt_image = transform_to_sizelabel(gt_image)
-        gt_image = cv2.cvtColor(gt_image, cv2.COLOR_RGB2BGR)
 
     aug = RandomCrop(width=crop_size, height=crop_size)
     file_stem = filename.split('.')[0]
