@@ -1,0 +1,20 @@
+{
+  "model": {
+    "architecture": "UNet",
+    "batch_normalize": true
+  },
+  "optimizer": {
+    "name": "adam",
+    "args": {
+      "lr" : 0.01
+    }
+  },
+  "train_data": {
+    "root_dir": "/tf/scripts/input/train_bin_256/",
+    "batch_size": 8,
+    "epochs": 10,
+    "use_size_label": false,
+    "branched": false
+  },
+  "output_dir": "/tf/scripts/output/unet_bin_epoch10/"
+}
