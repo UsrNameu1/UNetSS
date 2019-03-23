@@ -110,4 +110,4 @@ notebook/*
 input/
 output/
 *.out
-
+*.log
