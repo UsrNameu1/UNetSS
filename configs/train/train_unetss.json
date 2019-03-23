@@ -12,7 +12,7 @@
   "train_data": {
     "root_dir": "/tf/scripts/input/train_sizelabel_256/",
     "batch_size": 8,
-    "epochs": 2,
+    "epochs": 10,
     "use_size_label": true,
     "branched": true
   },
