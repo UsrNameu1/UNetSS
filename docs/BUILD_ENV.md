@@ -19,7 +19,7 @@ docker build -t unetss -f Dockerfile .
 build image for notebook
 
 ```bash
-docker build -t jupyter -f Dockerfile.jupyter .
+docker build -t unetss/jupyter -f Dockerfile.jupyter .
 ```
 
 ## run container
