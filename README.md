@@ -10,3 +10,7 @@ CVPR](http://openaccess.thecvf.com/content_cvpr_2018_workshops/papers/w4/Hamaguc
 ## Environment setup
 
 See [BUILD_ENV.md](./docs/BUILD_ENV.md).
+
+## Execution example
+
+See [ENDPOINTS.md](./docs/ENDPOINTS.md)
