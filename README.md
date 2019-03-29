@@ -11,6 +11,14 @@ CVPR](http://openaccess.thecvf.com/content_cvpr_2018_workshops/papers/w4/Hamaguc
 
 See [BUILD_ENV.md](./docs/BUILD_ENV.md).
 
+## Download datasets
+
+```buildoutcfg
+mkdir input 
+cd input
+curl -k https://files.inria.fr/aerialimagelabeling/getAerial.sh | bash
+```
+
 ## Execution example
 
 See [ENDPOINTS.md](./docs/ENDPOINTS.md)
