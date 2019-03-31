@@ -6,6 +6,11 @@
 - Intel Core™ i9-9900K
 - Nvidia GeForce RTX 2080 Ti 
 
+## software prerequisite
+
+- docker: 18.09.4
+- nvidia-docker: installation document is [here](https://github.com/NVIDIA/nvidia-docker)
+
 ## build docker environment
 
 on `./docker` directory 
