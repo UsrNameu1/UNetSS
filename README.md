@@ -9,15 +9,11 @@ CVPR](http://openaccess.thecvf.com/content_cvpr_2018_workshops/papers/w4/Hamaguc
 
 ## Environment setup
 
-See [BUILD_ENV.md](./docs/BUILD_ENV.md).
+See [BUILD_ENV.md](./docs/BUILD_ENV.md)
 
-## Download datasets
+## Dataset setup
 
-```buildoutcfg
-mkdir input 
-cd input
-curl -k https://files.inria.fr/aerialimagelabeling/getAerial.sh | bash
-```
+See [DATASET.md](./docs/DATASET.md)
 
 ## Execution example
 
