@@ -12,9 +12,9 @@
   "train_data": {
     "root_dir": "/tf/scripts/input/train_bin_256/",
     "batch_size": 8,
-    "epochs": 10,
+    "epochs": 100,
     "use_size_label": false,
     "branched": false
   },
-  "output_dir": "/tf/scripts/output/unet_bin_epoch10/"
+  "output_dir": "/tf/scripts/output/unet_bin_epoch100/"
 }
