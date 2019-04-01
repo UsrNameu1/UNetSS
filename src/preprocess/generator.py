@@ -52,7 +52,7 @@ def data_generator(root_path: Path,
 def _aug_transform(
     img_batch: np.ndarray, gt_batch: np.ndarray, label: Union[BinLabel, SizeLabel], branched: bool = False
 ) -> (np.ndarray, Union[np.ndarray, List[np.ndarray]]):
-    batch_auged = (runtime_augmentor(image=img, mask=gt) for img, gt in zip(img_batch, gt_batch))
+    batch_auged = (runtime_augmentor(image=img.astype(np.uint8), mask=gt) for img, gt in zip(img_batch, gt_batch))
     imgs_auged, gts_auged = zip(
         *([auged['image'] / 255., auged['mask'].astype(np.uint8)]
           for auged in batch_auged)
