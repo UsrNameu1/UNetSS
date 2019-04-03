@@ -12,11 +12,12 @@ cd input
 curl -k https://files.inria.fr/aerialimagelabeling/getAerial.sh | bash
 ```
 
-## Extract chicago data as validation data
+## Extract chicago data as test data
 
 ```bash
 cd input/AerialImageDataset
-mkdir -p validation/{images,gt}
-mv train/images/chicago* validation/images/
-mv train/gt/chicago* validation/gt/
+mv test test_nolabel
+mkdir -p test/{images,gt}
+mv train/images/chicago* test/images/
+mv train/gt/chicago* test/gt/
 ```
