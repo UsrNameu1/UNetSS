@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:1.13.0rc2-gpu-py3-jupyter
+FROM tensorflow/tensorflow:1.13.1-gpu-py3-jupyter
 
 RUN apt-get update \
  && apt-get install -y \
@@ -14,7 +14,7 @@ RUN wget https://bootstrap.pypa.io/get-pip.py \
 && python3 get-pip.py \
 && rm get-pip.py
 
-WORKDIR /root
-ADD requirements_jupyter.txt /root/
+WORKDIR /tf
+ADD requirements_jupyter.txt /tf/
 RUN pip3 --no-cache-dir install -r requirements_jupyter.txt \
 && rm requirements_jupyter.txt
