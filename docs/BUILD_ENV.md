@@ -34,7 +34,7 @@ on project root directory
 run batch container
 
 ```bash
-docker run --runtime=nvidia -d -it -v /$(pwd):/tf/scripts -e PYTHONPATH=/tf/scripts/src --name unetss unetss
+docker run --runtime=nvidia -d -it -v /$(pwd):/root -e PYTHONPATH=/root/src --name unetss unetss
 ```
 
 run jupyter container
