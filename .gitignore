@@ -112,3 +112,5 @@ output/
 *.out
 *.log
 Pipfile.lock
+.ipython/
+.keras

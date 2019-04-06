@@ -40,5 +40,5 @@ docker run --runtime=nvidia -d -it -v /$(pwd):/root -e PYTHONPATH=/root/src --na
 run jupyter container
 
 ```bash
-docker run --runtime=nvidia -d -it -p 8888:8888 -v /$(pwd):/tf/scripts -e PYTHONPATH=/tf/scripts --name jupyter unetss/jupyter
+docker run --runtime=nvidia -d -it -p 8888:8888 -v /$(pwd):/root -e PYTHONPATH=/root/src --name jupyter unetss/jupyter
 ```

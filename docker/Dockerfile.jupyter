@@ -14,7 +14,9 @@ RUN wget https://bootstrap.pypa.io/get-pip.py \
 && python3 get-pip.py \
 && rm get-pip.py
 
-WORKDIR /tf
-ADD requirements_jupyter.txt /tf/
+WORKDIR /root
+ADD requirements_jupyter.txt /root/
 RUN pip3 --no-cache-dir install -r requirements_jupyter.txt \
 && rm requirements_jupyter.txt
+
+CMD ["bash", "-c", "source /etc/bash.bashrc && jupyter notebook --notebook-dir=/root --ip 0.0.0.0 --no-browser --allow-root"]
