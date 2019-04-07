@@ -3,27 +3,38 @@
 
 ## augment from inria dataset
 
+### binary label
+
 ```bash
-docker exec -itd unetss bash -c \
-"python3 src/endpoints/augment.py \
+docker exec -itd unetss python3 src/endpoints/augment.py \
 --image_dir input/AerialImageDataset/train/images/ \
 --gt_dir input/AerialImageDataset/train/gt/ \
 --sample_size 10000 --crop_size 256 --validation_ratio 0.05 \
---output_dir input/train_bin_256 &>> out.log"
+--output_dir input/train_bin_256
 ```
 
-## train unet
+### size specific label
 
 ```bash
-docker exec -itd unetss bash -c \
-"python3 src/endpoints/train.py \
---config_path configs/train/train_unet.json &>> out.log"
+docker exec -itd unetss python3 src/endpoints/augment.py \
+--image_dir input/AerialImageDataset/train/images/ \
+--gt_dir input/AerialImageDataset/train/gt/ \
+--sample_size 10000 --crop_size 256 --validation_ratio 0.05 \
+--output_dir input/train_sizelabel_256 --use_size_label
 ```
 
-## train unet with size specific tasks
+## train model
+
+### unet architecture
 
 ```bash
-docker exec -itd unetss bash -c \
-"python3 src/endpoints/train.py \
---config_path configs/train/train_unetss.json &>> out.log"
+docker exec -itd unetss python3 src/endpoints/train.py \
+--config_path configs/train/train_unet.json 
+```
+
+### size specific unet architecture 
+
+```bash
+docker exec -itd unetss python3 src/endpoints/train.py \
+--config_path configs/train/train_unetss.json
 ```
