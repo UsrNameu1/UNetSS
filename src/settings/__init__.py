@@ -6,3 +6,5 @@ gt_subdir_name = 'gt'
 dummycls_name = 'dummycls'
 train_subdir_name = 'train'
 validation_subdir_name = 'validation'
+
+log_file_path = '/root/out.log'

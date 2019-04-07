@@ -8,7 +8,10 @@ import click
 from applications import UNet, UNetSS
 from preprocess.generator import data_generator
 from settings import SizeLabel, BinLabel
+from settings.logging import configure_logging
 import settings
+
+configure_logging()
 
 
 @click.command()
@@ -33,7 +36,7 @@ def train(config_path: str):
 
     model.compile(optimizer=optimizer, loss='categorical_crossentropy', metrics=['accuracy'])
 
-    train_root_dir = Path(configs["train_data"]["root_dir"])
+    train_root_dir = Path(configs["train_data"]["root_dir"], settings.train_subdir_name)
     batch_size = configs["train_data"]["batch_size"]
     label = SizeLabel if configs["train_data"]["use_size_label"] else BinLabel
     train_output_branched = configs["train_data"]["branched"]

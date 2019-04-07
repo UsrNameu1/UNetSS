@@ -15,6 +15,9 @@ from settings import (
     gt_subdir_name,
     dummycls_name
 )
+from settings.logging import configure_logging
+
+configure_logging()
 
 
 @click.command()
