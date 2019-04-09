@@ -3,6 +3,7 @@ import math
 import json
 
 from keras import optimizers
+from keras.callbacks import CSVLogger, ReduceLROnPlateau
 import click
 
 from applications import UNet, UNetSS
@@ -49,15 +50,22 @@ def train(config_path: str):
     validation_sample_n = \
         len(list(validation_root_dir.joinpath(settings.image_subdir_name, settings.dummycls_name).glob('./*.png')))
     epochs = configs["train_data"]["epochs"]
-    model.fit_generator(
-        train_data_generator, int(math.ceil(train_sample_n / batch_size)),
-        validation_data=validation_data_generator, validation_steps=validation_sample_n,
-        epochs=epochs
-    )
 
     output_dir = Path(configs["output_dir"])
     if not output_dir.exists():
         output_dir.mkdir(parents=True)
+
+    callbacks = [
+        CSVLogger(output_dir.joinpath('training.csv'), append=True),
+        ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=5, min_lr=0.0001)
+    ]
+
+    model.fit_generator(
+        train_data_generator, int(math.ceil(train_sample_n / batch_size)),
+        callbacks=callbacks,
+        validation_data=validation_data_generator, validation_steps=validation_sample_n,
+        epochs=epochs
+    )
 
     model.save_weights(output_dir.joinpath('weights_{}.h5'.format(epochs)).as_posix())
 
