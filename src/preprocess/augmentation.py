@@ -53,13 +53,11 @@ def random_crop(
         augmented = aug(image=image, mask=gt_image)
         image_cropped = augmented['image']
         gt_cropped = augmented['mask']
+        imsave(output_dir.joinpath(settings.image_subdir_name, settings.dummycls_name,
+                                   '{}_{}.png'.format(file_stem, i)).as_posix(), image_cropped)
+        imsave(output_dir.joinpath(settings.gt_subdir_name, settings.dummycls_name,
+                                   '{}_{}.png'.format(file_stem, i)).as_posix(), gt_cropped, check_contrast=False)
 
-        with warnings.catch_warnings():
-            warnings.simplefilter('ignore')  # in skimage 0.15 imsave function have check contrast arg... will be fixed
-            imsave(output_dir.joinpath(settings.image_subdir_name, settings.dummycls_name,
-                                       '{}_{}.png'.format(file_stem, i)).as_posix(), image_cropped)
-            imsave(output_dir.joinpath(settings.gt_subdir_name, settings.dummycls_name,
-                                       '{}_{}.png'.format(file_stem, i)).as_posix(), gt_cropped)
 
 
 """
