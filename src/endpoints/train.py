@@ -3,7 +3,7 @@ import math
 import json
 
 from keras import optimizers
-from keras.callbacks import CSVLogger, ReduceLROnPlateau
+from keras.callbacks import CSVLogger, ReduceLROnPlateau, ModelCheckpoint
 import click
 
 from applications import UNet, UNetSS
@@ -57,7 +57,9 @@ def train(config_path: str):
 
     callbacks = [
         CSVLogger(output_dir.joinpath('training.csv'), append=True),
-        ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=5, min_lr=0.0001)
+        ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=5, min_lr=0.00001),
+        ModelCheckpoint(output_dir.joinpath('weights_{epoch}.h5').as_posix(), monitor='val_loss', save_best_only=True,
+                        save_weights_only=True, mode='auto', period=5)
     ]
 
     model.fit_generator(

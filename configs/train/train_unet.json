@@ -5,16 +5,14 @@
   },
   "optimizer": {
     "name": "adam",
-    "args": {
-      "lr" : 0.1
-    }
+    "args": {}
   },
   "train_data": {
     "root_dir": "/root/input/train_bin_256/",
     "batch_size": 8,
-    "epochs": 1,
+    "epochs": 100,
     "use_size_label": false,
     "branched": false
   },
-  "output_dir": "/root/output/unet_bin_epoch10/"
+  "output_dir": "/root/output/unet_bin_epoch100/"
 }

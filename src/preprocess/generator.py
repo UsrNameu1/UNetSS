@@ -30,7 +30,7 @@ def data_generator(root_path: Path,
     image_datagen = ImageDataGenerator(**data_gen_args)
     gt_datagen = ImageDataGenerator(**data_gen_args)
 
-    seed = 31
+    seed = 37
     image_generator = image_datagen.flow_from_directory(
         root_path.joinpath(settings.image_subdir_name).as_posix(),
         batch_size=batch_size,
