@@ -114,3 +114,8 @@ output/
 Pipfile.lock
 .ipython/
 .keras
+.jupyter/
+.nv/
+.local/
+.cache/
+.config/
