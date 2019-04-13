@@ -1,10 +1,10 @@
 keras==2.2.4
 tensorflow-gpu==1.13.1
-albumentations==0.1.12
-numpy==1.16.1
-pandas==0.24.1
+albumentations==0.2.2
+numpy==1.16.2
+pandas==0.24.2
 scikit-image==0.15.0
-scikit-learn==0.20.2
+scikit-learn==0.20.3
 joblib==0.13.2
 loguru==0.2.5
 click==7.0
