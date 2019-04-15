@@ -1,5 +1,4 @@
 from pathlib import Path
-import warnings
 
 from cv2 import imread
 from skimage.io import imsave
