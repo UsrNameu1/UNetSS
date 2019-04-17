@@ -28,11 +28,11 @@ def transform_to_sizelabel(bin_image: np.ndarray) -> np.ndarray:
         parent_idx = hierarchy[0][idx][3]
         if parent_idx >= 0:
             image = cv2.drawContours(image, [contour], -1, SizeLabel.blank.value.rgb, -1)
-        elif area <= 3400:
+        elif area <= 1450:
             image = cv2.drawContours(image, [contour], -1, SizeLabel.small.value.rgb, -1)
-        elif 18800 > area >= 3400:
+        elif 18500 > area >= 1450:
             image = cv2.drawContours(image, [contour], -1, SizeLabel.medium.value.rgb, -1)
-        elif area >= 18800:
+        elif area >= 18500:
             image = cv2.drawContours(image, [contour], -1, SizeLabel.large.value.rgb, -1)
 
     return image
