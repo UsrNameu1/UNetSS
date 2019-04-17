@@ -2,6 +2,7 @@ from pathlib import Path
 
 from cv2 import imread
 from skimage.io import imsave
+from skimage.transform import resize
 import cv2
 from albumentations import (
     RandomCrop,
@@ -22,7 +23,8 @@ __all__ = ['random_crop', 'runtime_augmentor']
 
 def random_crop(
     image_dir: Path, gt_dir: Path,
-    filename: str, sample_size: int, crop_size: int, use_size_label: bool, output_dir: Path
+    filename: str, sample_size: int, crop_size: int, resize_ratio: float,
+    use_size_label: bool, output_dir: Path
 ):
     """
     randomly crop fixed size image sample to train model
@@ -31,6 +33,7 @@ def random_crop(
     :param filename: filename to image
     :param sample_size: sampling size per image
     :param crop_size: clopping image size
+    :param resize_ratio: resizing ratio
     :param use_size_label: if True, use size specific label gt output
     :param output_dir: output directory
     """
@@ -46,17 +49,19 @@ def random_crop(
         gt_image = transform_to_sizelabel(gt_image)
 
     aug = RandomCrop(width=crop_size, height=crop_size)
+    target_size = int(crop_size * resize_ratio)
     file_stem = filename.split('.')[0]
 
     for i in range(sample_size):
         augmented = aug(image=image, mask=gt_image)
         image_cropped = augmented['image']
+        image_cropped = resize(image_cropped, (target_size, target_size))
         gt_cropped = augmented['mask']
+        gt_cropped = resize(gt_cropped, (target_size, target_size))
         imsave(output_dir.joinpath(settings.image_subdir_name, settings.dummycls_name,
                                    '{}_{}.png'.format(file_stem, i)).as_posix(), image_cropped)
         imsave(output_dir.joinpath(settings.gt_subdir_name, settings.dummycls_name,
                                    '{}_{}.png'.format(file_stem, i)).as_posix(), gt_cropped, check_contrast=False)
-
 
 
 """
